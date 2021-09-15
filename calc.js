@@ -65,5 +65,11 @@ const calc = () => {
 };
 calc();
 
-// in order to impliment syntax errors while running the code I would say 
+
+// This code can use +,*,/ and - for whole number as well as integers
+// As well takes in consideration for parenthesis and decimals 
+
+// In order to impliment syntax errors while running the code I would say 
 // implimetn some more regex for word characters, or even wrap the whole thing in a try catch block
+
+
