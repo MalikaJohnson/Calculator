@@ -38,7 +38,7 @@ const calcReduceOpps = (eqArr, oppArr) => {
 const parenscheck = (input) => {
   const parensblock = input.find((item) => item.includes("("));
   if (parensblock) {
-    console.log(parensblock);
+    
     const newVal = parenscheck(
       getEqArr(parensblock.slice(1, parensblock.length - 1))
     );
@@ -58,9 +58,7 @@ const calc = () => {
   while (true) {
     const input = getInput("enter your equation");
     let eqArr = getEqArr(input);
-    console.log(eqArr);
-
-    console.log(parenscheck(eqArr));
+    
   }
 };
 calc();
