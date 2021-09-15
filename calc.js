@@ -56,15 +56,16 @@ const parenscheck = (input) => {
 };
 const calc = () => {
   while (true) {
-    const input = getInput("enter your equation");
+    const input = getInput("Enter your Equation");
     let eqArr = getEqArr(input);
-    
+  
+    console.log(parenscheck(eqArr));
   }
 };
 calc();
 
 
-// This code can use +,*,/ and - for whole number as well as integers
+// This code can use +,*,/ and - for whole number as integers
 // As well takes in consideration for parenthesis and decimals 
 
 // In order to impliment syntax errors while running the code I would say 
