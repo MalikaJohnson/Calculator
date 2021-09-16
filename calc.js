@@ -4,10 +4,6 @@ function getInput(prompt) {
   return readlineSync.question(`${prompt}: `);
 }
 
-// + is greedy and matches for that particular instance
-// \d* can be 0 or many digits
-// + is saying there must be at least one of this pattern, the pattern is and digit with a point in front of it
-
 const getEqArr = (eqStr) => {
   return eqStr.match(
     /\(.*\)|^-\d*(\.?\d+)+|(?<=[-+*\/])-\d*(\.?\d+)+|\d*(\.?\d+)+|[-+*\/]/g
@@ -35,19 +31,19 @@ const calcReduceOpps = (eqArr, oppArr) => {
     }
   }, []);
 };
-const parenscheck = (input) => {
-  const parensblock = input.find((item) => item.includes("("));
-  if (parensblock) {
+const parensCheck = (input) => {
+  const parensBlock = input.find((item) => item.includes("("));
+  if (parensBlock) {
     
-    const newVal = parenscheck(
-      getEqArr(parensblock.slice(1, parensblock.length - 1))
+    const newVal = parensCheck(
+      getEqArr(parensBlock.slice(1, parensBlock.length - 1))
     );
     input.splice(
       input.findIndex((item) => item.includes("(")),
       1,
       newVal
     );
-    return parenscheck(input);
+    return parensCheck(input);
   } else {
     let eqArr = calcReduceOpps(input, ["/", "*"]);
     eqArr = calcReduceOpps(eqArr, ["+", "-"]);
@@ -57,18 +53,24 @@ const parenscheck = (input) => {
 const calc = () => {
   while (true) {
     const input = getInput("Enter your Equation");
-    let eqArr = getEqArr(input);
-  
-    console.log(parenscheck(eqArr));
+    
+    if (input.search(/([-+*\/]){3,}/g) > 0) {
+      console.log('Syntax Error');
+      return;
+    }
+    
+    if (input.search(/[^\d-+*\/()]/g) > 0) {
+      console.log('Invalid Input');
+      return;
+    }
+    const eqArr = getEqArr(input);
+    
+
+    console.log(parensCheck(eqArr));
   }
 };
 calc();
 
 
-// This code can use +,*,/ and - for whole number as integers
-// As well takes in consideration for parenthesis and decimals 
-
-// In order to impliment syntax errors while running the code I would say 
-// implimetn some more regex for word characters, or even wrap the whole thing in a try catch block
 
 
